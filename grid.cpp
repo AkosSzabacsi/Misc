@@ -7,22 +7,22 @@ struct Point
 {
 	uint x;
 	uint y;
-	uint data;
+	uint value;
 	
-	Point(uint _x, uint _y, float _data  =0):
+	Point(uint _x, uint _y, float _value = 0):
 	x(_x),
 	y(_y),
 	data(_data)
 	{}
 };
 
-class Matrix
+class Grid
 {
 	std::vector<Point> M;
 	uint r;
 	uint c;
 	public:
-		Matrix(uint rows, uint cols): r(rows), c(cols)
+		Grid(uint rows, uint cols): r(rows), c(cols)
 		{
 			M.reserve(r*c);
 			
@@ -48,10 +48,17 @@ class Matrix
 				std::cout << std::endl;
 			}
 		}
+		
+		Point getElement(uint row, uint col)
+		{
+			return M[row * c + col];
+		}
 };
 
 int main()
 {
-	Matrix m(5, 5);
+	Grid m(10, 10);
 	m.print();
+	
+	std::cout << m.getElement(5,5).x << " " << m.getElement(5,5).y << std::endl;
 }
